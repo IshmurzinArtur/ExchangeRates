@@ -23,7 +23,7 @@ namespace ExchangeRates.Models
 
     public class USD
     {
-        public double price { get; set; }
+        public double? price { get; set; }
         public double? volume_24h { get; set; }
         public double? percent_change_1h { get; set; }
         public double? percent_change_24h { get; set; }
@@ -50,7 +50,7 @@ namespace ExchangeRates.Models
         public int num_market_pairs { get; set; }
         public List<object> tags { get; set; }
         public Platform platform { get; set; }
-        public int cmc_rank { get; set; }
+        public int? cmc_rank { get; set; }
         public DateTime last_updated { get; set; }
         public Quote quote { get; set; }
     }
