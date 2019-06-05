@@ -1,0 +1,75 @@
+﻿@model ExchangeRates.Models.RootObject
+@{
+    ViewBag.Title = "Котировки криптовалют";
+}
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="~/Scripts/tablesorter-2.31.1/js/jquery.tablesorter.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts.js"></script>
+<div class="container">
+    <table class="table table-bordered w-100 table-striped table-hover" id="valutesTable">
+        <thead>
+            <tr>
+                <th scope="col">Лого</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Символ</th>
+                <th scope="col">Курс USD</th>
+                <th scope="col">Рост(24ч)</th>
+                <th scope="col"">Рост(1ч)</th>
+                <th scope="col">Капитализации в USD</th>
+                <th scope="col">Последнее обновление</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model.data)
+            {
+                var logo = "https://s2.coinmarketcap.com/static/img/coins/64x64/" + data.id + ".png";
+                <tr>
+                    <td>
+                        <img class="" src="@logo">
+                    </td>
+                    <td>
+                        @data.name
+                    </td>
+                    <td>
+                        @data.symbol
+                    </td>
+                    <td>
+                        @data.quote.USD.price
+                    </td>
+                    @if (data.quote.USD.percent_change_24h >= 0)
+                    {
+                        <td style="color:lawngreen">
+                            @data.quote.USD.percent_change_24h
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="color:red">
+                            @data.quote.USD.percent_change_24h
+                        </td>
+                    }
+                    @if (@data.quote.USD.percent_change_1h >= 0)
+                    {
+                        <td style="color:lawngreen">
+                            @data.quote.USD.percent_change_1h
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="color:red">
+                            @data.quote.USD.percent_change_1h
+                        </td>
+                    }
+                    <td>
+                        @data.quote.USD.market_cap
+                    </td>
+                    <td>
+                        @data.quote.USD.last_updated
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
